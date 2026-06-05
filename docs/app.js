@@ -16,6 +16,7 @@ function initApp() {
     setupForms();
     setupButtons();
     checkExistingRegistration();
+    setupVoting();
 }
 
 // Simple SPA Routing based on hash
@@ -346,25 +347,49 @@ window.deleteParticipant = async function(id) {
 // Reset Raffle Data (Bulk Delete)
 async function resetRaffleData() {
     try {
-        const snapshot = await db.collection("sorteo_participantes").get();
-        if (snapshot.empty) {
-            alert("No hay participantes para eliminar.");
-            return;
-        }
-        
+        // Delete participants
+        const participantsSnapshot = await db.collection("sorteo_participantes").get();
         const batch = db.batch();
-        snapshot.docs.forEach((doc) => {
+        
+        participantsSnapshot.docs.forEach((doc) => {
+            batch.delete(doc.ref);
+        });
+        
+        // Delete votes
+        const votesSnapshot = await db.collection("sorteo_votos").get();
+        votesSnapshot.docs.forEach((doc) => {
             batch.delete(doc.ref);
         });
         
         await batch.commit();
         
-        // Also clear local state of the browser just in case, allowing the admin to test registration again
+        // Clear local storage states
         localStorage.removeItem("ssamanth_registered");
         localStorage.removeItem("ssamanth_user_name");
         localStorage.removeItem("ssamanth_user_phone");
+        localStorage.removeItem("ssamanth_voted");
         
-        alert("Sorteo reiniciado exitosamente. Todos los registros anteriores fueron eliminados.");
+        // Reset the UI of voting
+        const prizesGrid = document.querySelector(".prizes-grid");
+        if (prizesGrid) {
+            prizesGrid.classList.remove("has-voted");
+        }
+        document.querySelectorAll(".option-card").forEach(card => {
+            card.classList.remove("voted-choice");
+        });
+        ["conjunto", "pantalon", "polera"].forEach(opt => {
+            const btn = document.getElementById(`btn-vote-${opt}`);
+            const resultDiv = document.getElementById(`result-${opt}`);
+            if (btn) {
+                btn.classList.remove("hidden");
+                btn.disabled = false;
+            }
+            if (resultDiv) {
+                resultDiv.classList.add("hidden");
+            }
+        });
+        
+        alert("Sorteo y votaciones reiniciados exitosamente. Todos los registros anteriores fueron eliminados.");
         
     } catch (error) {
         console.error("Error al reiniciar sorteo: ", error);
@@ -404,4 +429,119 @@ function exportParticipantsToCSV() {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+}
+
+// Global variable to store vote counts
+let voteCounts = { conjunto: 0, pantalon: 0, polera: 0 };
+
+// Setup Interactive Voting Questionnaire
+function setupVoting() {
+    const voteButtons = document.querySelectorAll(".vote-btn");
+    
+    // Real-time listener for votes
+    db.collection("sorteo_votos").onSnapshot((snapshot) => {
+        voteCounts = { conjunto: 0, pantalon: 0, polera: 0 };
+        snapshot.forEach(doc => {
+            const opt = doc.data().opcion;
+            if (voteCounts.hasOwnProperty(opt)) {
+                voteCounts[opt]++;
+            }
+        });
+        
+        // Update client voting UI results
+        updateVotingUI();
+        // Update admin panel voting results
+        updateAdminVotingUI();
+    }, (error) => {
+        console.error("Error al obtener votos en tiempo real: ", error);
+    });
+
+    // Add click event to buttons
+    voteButtons.forEach(btn => {
+        btn.addEventListener("click", async () => {
+            const option = btn.getAttribute("data-option");
+            
+            // Prevent multiple votes
+            if (localStorage.getItem("ssamanth_voted")) return;
+            
+            // Disable buttons immediately to prevent spam click
+            voteButtons.forEach(b => b.disabled = true);
+            
+            try {
+                // Add vote to Firestore
+                await db.collection("sorteo_votos").add({
+                    opcion: option,
+                    fecha: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                
+                // Store that this user has voted
+                localStorage.setItem("ssamanth_voted", option);
+                
+                // Update UI
+                updateVotingUI();
+                
+            } catch (error) {
+                console.error("Error al registrar voto: ", error);
+                alert("Hubo un error al registrar tu voto. Por favor, intenta de nuevo.");
+                voteButtons.forEach(b => b.disabled = false);
+            }
+        });
+    });
+}
+
+// Update client voting questionnaire results
+function updateVotingUI() {
+    const votedOption = localStorage.getItem("ssamanth_voted");
+    if (!votedOption) return; // Only show results if they have voted
+    
+    const prizesGrid = document.querySelector(".prizes-grid");
+    if (prizesGrid) prizesGrid.classList.add("has-voted");
+    
+    // Highlight chosen card
+    document.querySelectorAll(".option-card").forEach(card => {
+        card.classList.remove("voted-choice");
+    });
+    const chosenCard = document.getElementById(`card-${votedOption}`);
+    if (chosenCard) {
+        chosenCard.classList.add("voted-choice");
+    }
+    
+    const totalVotes = voteCounts.conjunto + voteCounts.pantalon + voteCounts.polera;
+    
+    ["conjunto", "pantalon", "polera"].forEach(opt => {
+        const btn = document.getElementById(`btn-vote-${opt}`);
+        const resultDiv = document.getElementById(`result-${opt}`);
+        
+        if (btn) btn.classList.add("hidden");
+        if (resultDiv) {
+            resultDiv.classList.remove("hidden");
+            
+            const count = voteCounts[opt];
+            const pct = totalVotes > 0 ? Math.round((count / totalVotes) * 100) : 0;
+            
+            resultDiv.querySelector(".vote-percentage").innerText = `${pct}%`;
+            resultDiv.querySelector(".vote-count").innerText = `(${count} voto${count === 1 ? '' : 's'})`;
+            resultDiv.querySelector(".vote-result-bar").style.width = `${pct}%`;
+        }
+    });
+}
+
+// Update admin statistics for votes
+function updateAdminVotingUI() {
+    const totalVotes = voteCounts.conjunto + voteCounts.pantalon + voteCounts.polera;
+    
+    ["conjunto", "pantalon", "polera"].forEach(opt => {
+        const count = voteCounts[opt];
+        const pct = totalVotes > 0 ? Math.round((count / totalVotes) * 100) : 0;
+        
+        const textElem = document.getElementById(`admin-votes-${opt}`);
+        const barElem = document.getElementById(`admin-bar-${opt}`);
+        
+        if (textElem) {
+            textElem.innerText = `${count} voto${count === 1 ? '' : 's'} (${pct}%)`;
+        }
+        if (barElem) {
+            barElem.style.width = `${pct}%`;
+        }
+    });
 }

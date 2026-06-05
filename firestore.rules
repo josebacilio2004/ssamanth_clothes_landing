@@ -2,7 +2,9 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     match /sorteo_participantes/{document} {
-      // Permitir que cualquiera pueda registrarse, leer y administrar los participantes del sorteo
+      allow read, write: if true;
+    }
+    match /sorteo_votos/{document} {
       allow read, write: if true;
     }
   }

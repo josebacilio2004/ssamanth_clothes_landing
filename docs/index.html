@@ -87,50 +87,96 @@
                 </div>
             </section>
 
-            <!-- Prizes Gallery Section -->
-            <section class="glass-card prizes-section">
+            <!-- Voting Questionnaire Section -->
+            <section class="glass-card prizes-section" id="voting-section">
                 <div class="section-title">
-                    <i class="fa-solid fa-gift glow-icon pink-glow"></i>
-                    <h2>Premios Exclusivos a Sortear</h2>
-                    <p class="section-subtitle">¡Participa y llévate las mejores marcas de ropa y calzado!</p>
+                    <i class="fa-solid fa-square-poll-vertical glow-icon pink-glow"></i>
+                    <h2>¿Qué prenda prefieres para el sorteo?</h2>
+                    <p class="section-subtitle">¡Vota por tu favorita! Solo se sorteará una de estas tres opciones en base a sus votos.</p>
                 </div>
+                
                 <div class="prizes-grid">
-                    <!-- Premio 1: Outfit Shein -->
-                    <div class="prize-card">
+                    <!-- Opción 1: Conjunto -->
+                    <div class="prize-card option-card" id="card-conjunto">
                         <div class="prize-image-container">
-                            <img src="shein_outfit.png" alt="Outfit Shein" class="prize-image">
-                            <span class="brand-badge shein">SHEIN</span>
+                            <img src="shein_outfit.png" alt="Conjunto de Ropa" class="prize-image">
+                            <span class="brand-badge shein">SHEIN STYLE</span>
                         </div>
                         <div class="prize-info">
-                            <h3>Outfit Tendencia</h3>
-                            <p>Prendas exclusivas importadas, vestidos y conjuntos de última moda al estilo Shein.</p>
-                            <span class="prize-value">Colección Premium</span>
+                            <div>
+                                <h3>Conjunto de Ropa</h3>
+                                <p>Set coordinado de prendas de última tendencia. El outfit perfecto para tu estilo diario.</p>
+                            </div>
+                            <div class="vote-action-container">
+                                <button class="submit-btn vote-btn" data-option="conjunto" id="btn-vote-conjunto">
+                                    <i class="fa-solid fa-check"></i> Votar por Conjunto
+                                </button>
+                                <div class="vote-result hidden" id="result-conjunto">
+                                    <div class="vote-result-info">
+                                        <span class="vote-percentage">0%</span>
+                                        <span class="vote-count">(0 votos)</span>
+                                    </div>
+                                    <div class="vote-result-bar-container">
+                                        <div class="vote-result-bar" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Premio 2: Ropa Metal / Stop -->
-                    <div class="prize-card">
+                    <!-- Opción 2: Pantalón -->
+                    <div class="prize-card option-card" id="card-pantalon">
                         <div class="prize-image-container">
-                            <img src="streetwear_outfit.png" alt="Outfit Metal/Stop" class="prize-image">
+                            <img src="streetwear_outfit.png" alt="Pantalón de Moda" class="prize-image">
                             <span class="brand-badge metal">METAL & STOP</span>
                         </div>
                         <div class="prize-info">
-                            <h3>Moda Urbana</h3>
-                            <p>Casacas denim, jeans slouchy, tops y streetwear juvenil de las marcas Metal y Stop.</p>
-                            <span class="prize-value">Estilo Juvenil</span>
+                            <div>
+                                <h3>Pantalón de Moda</h3>
+                                <p>Jeans slouchy, cargo o wide-leg súper cómodos y combinables para cualquier ocasión.</p>
+                            </div>
+                            <div class="vote-action-container">
+                                <button class="submit-btn vote-btn" data-option="pantalon" id="btn-vote-pantalon">
+                                    <i class="fa-solid fa-check"></i> Votar por Pantalón
+                                </button>
+                                <div class="vote-result hidden" id="result-pantalon">
+                                    <div class="vote-result-info">
+                                        <span class="vote-percentage">0%</span>
+                                        <span class="vote-count">(0 votos)</span>
+                                    </div>
+                                    <div class="vote-result-bar-container">
+                                        <div class="vote-result-bar" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Premio 3: Zapatillas Top Marcas -->
-                    <div class="prize-card">
+                    <!-- Opción 3: Polera -->
+                    <div class="prize-card option-card" id="card-polera">
                         <div class="prize-image-container">
-                            <img src="hype_sneakers.png" alt="Zapatillas de marca" class="prize-image">
-                            <span class="brand-badge sneakers">MULTIMARCA</span>
+                            <img src="polera_oversize.png" alt="Polera Oversize" class="prize-image">
+                            <span class="brand-badge sneakers">URBANO HYPE</span>
                         </div>
                         <div class="prize-info">
-                            <h3>Zapatillas de Colección</h3>
-                            <p>Modelos urbanos de alta tendencia de las marcas líderes: Nike, Adidas, Jordan y más.</p>
-                            <span class="prize-value">Todas las marcas</span>
+                            <div>
+                                <h3>Polera Oversize</h3>
+                                <p>Polera holgada con capucha o cuello redondo de tela premium, ideal para el frío con actitud.</p>
+                            </div>
+                            <div class="vote-action-container">
+                                <button class="submit-btn vote-btn" data-option="polera" id="btn-vote-polera">
+                                    <i class="fa-solid fa-check"></i> Votar por Polera
+                                </button>
+                                <div class="vote-result hidden" id="result-polera">
+                                    <div class="vote-result-info">
+                                        <span class="vote-percentage">0%</span>
+                                        <span class="vote-count">(0 votos)</span>
+                                    </div>
+                                    <div class="vote-result-bar-container">
+                                        <div class="vote-result-bar" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -263,6 +309,31 @@
                     <div class="stat-info">
                         <h3>Activo</h3>
                         <p>Estado del Sorteo</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Voting Results in Dashboard -->
+            <section class="glass-card voting-stats-card" style="margin-bottom: 30px;">
+                <div class="objective-header" style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+                    <i class="fa-solid fa-square-poll-vertical glow-icon yellow" style="font-size: 1.5rem; color: var(--accent); text-shadow: 0 0 10px rgba(241, 196, 15, 0.5);"></i>
+                    <h2 style="font-size: 1.4rem; font-weight: 600;">Estadísticas de Votación del Premio</h2>
+                </div>
+                <div class="admin-voting-results-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-top: 15px;">
+                    <div class="admin-vote-stat" style="background: rgba(0,0,0,0.25); padding: 20px; border-radius: 16px; border: 1px solid var(--glass-border);">
+                        <h4 style="font-size: 1rem; font-weight: 600; color: #fff;">Conjunto de Ropa</h4>
+                        <p id="admin-votes-conjunto" style="font-size: 1.8rem; font-weight: 700; color: var(--primary); margin: 8px 0;">0 votos (0%)</p>
+                        <div class="progress-bar-container" style="height: 6px; margin-bottom: 0; background: rgba(255,255,255,0.05);"><div id="admin-bar-conjunto" class="progress-bar" style="width: 0%"></div></div>
+                    </div>
+                    <div class="admin-vote-stat" style="background: rgba(0,0,0,0.25); padding: 20px; border-radius: 16px; border: 1px solid var(--glass-border);">
+                        <h4 style="font-size: 1rem; font-weight: 600; color: #fff;">Pantalón de Moda</h4>
+                        <p id="admin-votes-pantalon" style="font-size: 1.8rem; font-weight: 700; color: var(--secondary); margin: 8px 0;">0 votos (0%)</p>
+                        <div class="progress-bar-container" style="height: 6px; margin-bottom: 0; background: rgba(255,255,255,0.05);"><div id="admin-bar-pantalon" class="progress-bar" style="width: 0%; background: linear-gradient(90deg, #a855f7, #6366f1)"></div></div>
+                    </div>
+                    <div class="admin-vote-stat" style="background: rgba(0,0,0,0.25); padding: 20px; border-radius: 16px; border: 1px solid var(--glass-border);">
+                        <h4 style="font-size: 1rem; font-weight: 600; color: #fff;">Polera Oversize</h4>
+                        <p id="admin-votes-polera" style="font-size: 1.8rem; font-weight: 700; color: var(--accent); margin: 8px 0;">0 votos (0%)</p>
+                        <div class="progress-bar-container" style="height: 6px; margin-bottom: 0; background: rgba(255,255,255,0.05);"><div id="admin-bar-polera" class="progress-bar" style="width: 0%; background: linear-gradient(90deg, #eab308, #ca8a04)"></div></div>
                     </div>
                 </div>
             </section>
