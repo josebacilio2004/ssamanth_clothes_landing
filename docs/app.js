@@ -2,22 +2,9 @@
 let currentParticipants = [];
 let unsubscribeRealtime = null;
 
-// Hashing function for simple client-side credential check
-// (Better than plaintext, though client-side is inherently visible in JS, 
-// we also configure Firestore rules to restrict reads to authenticated or simple checks)
-function simpleHash(str) {
-    let hash = 0;
-    for (let i = 0; i < str.length; i++) {
-        const char = str.charCodeAt(i);
-        hash = (hash << 5) - hash + char;
-        hash = hash & hash; // Convert to 32bit integer
-    }
-    return hash.toString();
-}
-
-// Credentials hashes (username: ssamira, password: 60621566ssam)
-const ADMIN_USER_HASH = simpleHash("ssamira");
-const ADMIN_PASS_HASH = simpleHash("60621566ssam");
+// Credentials direct comparison for client-side static page
+const ADMIN_USER = "ssamira";
+const ADMIN_PASS = "60621566ssam";
 
 document.addEventListener("DOMContentLoaded", () => {
     initApp();
@@ -124,7 +111,7 @@ function setupForms() {
         const passInput = document.getElementById("admin-pass").value;
         const loginError = document.getElementById("login-error");
         
-        if (simpleHash(userInput) === ADMIN_USER_HASH && simpleHash(passInput) === ADMIN_PASS_HASH) {
+        if (userInput === ADMIN_USER && passInput === ADMIN_PASS) {
             // Successful Login
             sessionStorage.setItem("admin_logged", "true");
             loginError.classList.add("hidden");

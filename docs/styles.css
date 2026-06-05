@@ -157,19 +157,42 @@ body {
     margin-top: -5px;
 }
 
-.rainbow-title {
-    font-size: 3.5rem;
-    font-weight: 800;
+.logo-img-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.brand-logo-img {
+    max-width: 140px;
+    height: auto;
+    filter: drop-shadow(0 0 20px rgba(255, 94, 151, 0.5));
+    animation: float 6s ease-in-out infinite;
+}
+
+.rainbow-title-container {
+    width: 100%;
+    max-width: 700px;
+    margin: -15px auto 10px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+}
+
+.rainbow-svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.rainbow-text {
+    font-size: 3.8rem;
+    font-weight: 900;
     text-transform: uppercase;
-    text-align: center;
-    letter-spacing: 2px;
-    background: linear-gradient(to right, #ff3366, #ff66cc, #9933ff, #33ccff, #33ff66, #ffcc33, #ff3366);
-    background-size: 400% auto;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: rainbow 8s linear infinite;
-    margin-bottom: 5px;
-    text-shadow: 0 4px 20px rgba(255, 94, 151, 0.15);
+    letter-spacing: 3px;
+    font-family: var(--font-sans);
+    text-shadow: 0 4px 15px rgba(255, 94, 151, 0.2);
 }
 
 .tagline {
@@ -1024,3 +1047,183 @@ body {
         padding: 12px 15px;
     }
 }
+
+/* Prizes Gallery Section Styling */
+.prizes-section {
+    margin-bottom: 40px;
+    border: 1px solid var(--glass-border);
+    position: relative;
+    overflow: hidden;
+}
+
+.prizes-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 94, 151, 0.03) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.section-title h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-top: 10px;
+    letter-spacing: 0.5px;
+    background: linear-gradient(135deg, #ffffff 40%, var(--text-muted));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.section-subtitle {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-top: 6px;
+    font-weight: 300;
+}
+
+.pink-glow {
+    color: var(--primary);
+    font-size: 2.2rem;
+    filter: drop-shadow(0 0 10px rgba(255, 94, 151, 0.6));
+}
+
+.prizes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.prize-card {
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.prize-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(255, 94, 151, 0.4);
+    box-shadow: 0 12px 30px rgba(255, 94, 151, 0.25);
+}
+
+.prize-image-container {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    background: rgba(0,0,0,0.1);
+}
+
+.prize-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.prize-card:hover .prize-image {
+    transform: scale(1.1);
+}
+
+.brand-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    padding: 6px 14px;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.brand-badge.shein {
+    background: #000000;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.brand-badge.metal {
+    background: linear-gradient(135deg, #2c003e, #03001e);
+    border: 1px solid rgba(142, 45, 226, 0.4);
+}
+
+.brand-badge.sneakers {
+    background: linear-gradient(135deg, var(--secondary), var(--primary));
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.prize-info {
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex-grow: 1;
+    justify-content: space-between;
+}
+
+.prize-info h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.3px;
+}
+
+.prize-info p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 5px;
+}
+
+.prize-value {
+    align-self: flex-start;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--accent);
+    background: rgba(241, 196, 15, 0.08);
+    padding: 5px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(241, 196, 15, 0.25);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Responsividad para SVG Parabólico */
+@media (max-width: 768px) {
+    .rainbow-title-container {
+        height: 120px;
+    }
+    .rainbow-text {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .rainbow-title-container {
+        height: 80px;
+        margin-top: 0px;
+    }
+    .rainbow-text {
+        font-size: 2.2rem;
+    }
+    .brand-logo-img {
+        max-width: 110px;
+    }
+    .section-title h2 {
+        font-size: 1.4rem;
+    }
+}
+

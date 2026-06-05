@@ -26,11 +26,36 @@
         <!-- Public View: Landing Page & Form -->
         <main id="public-view" class="fade-in">
             <header class="header">
+                <div class="logo-img-container">
+                    <img src="ssamanth-removebg-preview.png" alt="Ssamanth Clothes Logo" class="brand-logo-img">
+                </div>
                 <div class="logo">
                     <span class="logo-text">Ssamanth</span>
                     <span class="logo-sub">Clothes</span>
                 </div>
-                <h1 class="rainbow-title">EL GRAN SORTEO</h1>
+                <div class="rainbow-title-container">
+                    <svg viewBox="0 0 800 180" class="rainbow-svg">
+                        <defs>
+                            <linearGradient id="rainbow-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#ff3366" />
+                                <stop offset="14%" stop-color="#ff66cc" />
+                                <stop offset="28%" stop-color="#9933ff" />
+                                <stop offset="42%" stop-color="#33ccff" />
+                                <stop offset="56%" stop-color="#33ff66" />
+                                <stop offset="70%" stop-color="#ffcc33" />
+                                <stop offset="85%" stop-color="#ff8833" />
+                                <stop offset="100%" stop-color="#ff3366" />
+                            </linearGradient>
+                        </defs>
+                        <!-- Define the parabolic curve (Quadratic Bezier Curve) -->
+                        <path id="curve" d="M100,150 Q400,20 700,150" fill="transparent" />
+                        <text width="800">
+                            <textPath href="#curve" startOffset="50%" text-anchor="middle" class="rainbow-text" fill="url(#rainbow-gradient)">
+                                EL GRAN SORTEO
+                            </textPath>
+                        </text>
+                    </svg>
+                </div>
                 <p class="tagline">¡Viste tu confianza, define tu estilo!</p>
             </header>
 
@@ -58,6 +83,55 @@
                         <a href="https://www.instagram.com/ssamanthclothes/" target="_blank" class="social-btn instagram-btn" id="btn-instagram">
                             <i class="fa-brands fa-instagram"></i> Instagram
                         </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Prizes Gallery Section -->
+            <section class="glass-card prizes-section">
+                <div class="section-title">
+                    <i class="fa-solid fa-gift glow-icon pink-glow"></i>
+                    <h2>Premios Exclusivos a Sortear</h2>
+                    <p class="section-subtitle">¡Participa y llévate las mejores marcas de ropa y calzado!</p>
+                </div>
+                <div class="prizes-grid">
+                    <!-- Premio 1: Outfit Shein -->
+                    <div class="prize-card">
+                        <div class="prize-image-container">
+                            <img src="shein_outfit.png" alt="Outfit Shein" class="prize-image">
+                            <span class="brand-badge shein">SHEIN</span>
+                        </div>
+                        <div class="prize-info">
+                            <h3>Outfit Tendencia</h3>
+                            <p>Prendas exclusivas importadas, vestidos y conjuntos de última moda al estilo Shein.</p>
+                            <span class="prize-value">Colección Premium</span>
+                        </div>
+                    </div>
+
+                    <!-- Premio 2: Ropa Metal / Stop -->
+                    <div class="prize-card">
+                        <div class="prize-image-container">
+                            <img src="streetwear_outfit.png" alt="Outfit Metal/Stop" class="prize-image">
+                            <span class="brand-badge metal">METAL & STOP</span>
+                        </div>
+                        <div class="prize-info">
+                            <h3>Moda Urbana</h3>
+                            <p>Casacas denim, jeans slouchy, tops y streetwear juvenil de las marcas Metal y Stop.</p>
+                            <span class="prize-value">Estilo Juvenil</span>
+                        </div>
+                    </div>
+
+                    <!-- Premio 3: Zapatillas Top Marcas -->
+                    <div class="prize-card">
+                        <div class="prize-image-container">
+                            <img src="hype_sneakers.png" alt="Zapatillas de marca" class="prize-image">
+                            <span class="brand-badge sneakers">MULTIMARCA</span>
+                        </div>
+                        <div class="prize-info">
+                            <h3>Zapatillas de Colección</h3>
+                            <p>Modelos urbanos de alta tendencia de las marcas líderes: Nike, Adidas, Jordan y más.</p>
+                            <span class="prize-value">Todas las marcas</span>
+                        </div>
                     </div>
                 </div>
             </section>
