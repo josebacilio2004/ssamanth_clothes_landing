@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gran Sorteo - Ssamanth Clothes</title>
+    <meta name="description" content="Participa en el gran sorteo de Ssamanth Clothes. Sigue los pasos para ganar prendas exclusivas y definir tu estilo.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,500&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Background elements for Glassmorphism depth -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-glow bg-glow-3"></div>
+
+    <!-- Main Container -->
+    <div class="app-container">
+        
+        <!-- Public View: Landing Page & Form -->
+        <main id="public-view" class="fade-in">
+            <header class="header">
+                <div class="logo">
+                    <span class="logo-text">Ssamanth</span>
+                    <span class="logo-sub">Clothes</span>
+                </div>
+                <h1 class="rainbow-title">EL GRAN SORTEO</h1>
+                <p class="tagline">¡Viste tu confianza, define tu estilo!</p>
+            </header>
+
+            <!-- Brand Philosophy & Objective -->
+            <section class="glass-card objective-card">
+                <div class="objective-header">
+                    <i class="fa-solid fa-gem glow-icon"></i>
+                    <h2>Nuestro Propósito</h2>
+                </div>
+                <p class="objective-text">
+                    "En <strong>Ssamanth Clothes</strong> creamos moda para empoderar cada paso de tu día. Nos dedicamos a llevar prendas de alta calidad y diseño exclusivo a nuestras clientas, potenciando su seguridad y brillo natural."
+                </p>
+                <div class="goal-container">
+                    <div class="goal-info">
+                        <span>Meta del Sorteo: <strong>100+ Seguidores</strong></span>
+                        <span id="goal-progress-text">¡Ayúdanos a llegar!</span>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" style="width: 85%"></div>
+                    </div>
+                    <div class="social-links-grid">
+                        <a href="https://www.tiktok.com/@ssamanthclothes?is_from_webapp=1&sender_device=pc" target="_blank" class="social-btn tiktok-btn" id="btn-tiktok">
+                            <i class="fa-brands fa-tiktok"></i> TikTok
+                        </a>
+                        <a href="https://www.instagram.com/ssamanthclothes/" target="_blank" class="social-btn instagram-btn" id="btn-instagram">
+                            <i class="fa-brands fa-instagram"></i> Instagram
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Steps & Rules -->
+            <section class="steps-grid">
+                <!-- Paso 1: Registro -->
+                <div class="glass-card step-card" id="step-1-card">
+                    <div class="step-badge">1</div>
+                    <h3>Seguir & Registrarse</h3>
+                    <p class="step-desc">Síguenos en TikTok e Instagram, luego regístrate aquí con tus datos de contacto.</p>
+                    
+                    <form id="raffle-form" class="form-container">
+                        <div class="input-group">
+                            <label for="user-name"><i class="fa-regular fa-user"></i> Nombre Completo</label>
+                            <input type="text" id="user-name" required placeholder="Ej. Samira Sánchez">
+                        </div>
+                        <div class="input-group">
+                            <label for="user-phone"><i class="fa-solid fa-phone"></i> Celular / WhatsApp</label>
+                            <input type="tel" id="user-phone" required placeholder="Ej. 917218376">
+                        </div>
+                        <button type="submit" class="submit-btn" id="btn-submit-raffle">
+                            <span>Registrarme ahora</span> <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </form>
+                    
+                    <div id="form-success" class="success-message hidden">
+                        <i class="fa-regular fa-circle-check"></i>
+                        <h4>¡Registro Exitoso!</h4>
+                        <p>Tus datos han sido guardados. Continúa al paso 2 para validar tu participación.</p>
+                    </div>
+                </div>
+
+                <!-- Paso 2: Evidencia por WhatsApp -->
+                <div class="glass-card step-card disabled" id="step-2-card">
+                    <div class="step-badge">2</div>
+                    <h3>Enviar Evidencia</h3>
+                    <p class="step-desc">Envía una captura de pantalla que demuestre que nos sigues en TikTok e Instagram.</p>
+                    
+                    <div class="whatsapp-box">
+                        <p class="whatsapp-instructions">Pulsa el botón de abajo para enviarnos las capturas directamente a nuestro WhatsApp de soporte.</p>
+                        <a href="https://wa.me/51917218376?text=Hola%20Ssamanth%20Clothes!%20Aquí%20tienes%20las%20capturas%20de%20pantalla%20para%20validar%20mi%20participación%20en%20el%20Gran%20Sorteo." 
+                           target="_blank" 
+                           class="whatsapp-btn disabled-btn" 
+                           id="btn-whatsapp">
+                            <i class="fa-brands fa-whatsapp"></i> Enviar a +51 917 218 376
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Invitation Card -->
+            <section class="glass-card invite-card">
+                <div class="invite-content">
+                    <i class="fa-solid fa-bullhorn invite-icon"></i>
+                    <h3>¡Todas están invitadas!</h3>
+                    <p>Comparte este sorteo con tus amigas, familiares y conocidas. ¡Mientras más compartas, más posibilidades tienes de ganar prendas exclusivas de Ssamanth Clothes!</p>
+                    <div class="share-box">
+                        <input type="text" readonly value="https://josebacilio2004.github.io/ssamanth_clothes_landing/" id="share-link-input">
+                        <button class="copy-btn" id="btn-copy-link"><i class="fa-regular fa-copy"></i> Compartir</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Admin Login Panel (Popup/Modal style) -->
+        <div id="admin-login-modal" class="modal hidden">
+            <div class="modal-content glass-card">
+                <button class="close-modal-btn" id="btn-close-login"><i class="fa-solid fa-xmark"></i></button>
+                <div class="admin-login-header">
+                    <i class="fa-solid fa-lock"></i>
+                    <h2>Acceso Administradora</h2>
+                </div>
+                <form id="admin-login-form" class="form-container">
+                    <div class="input-group">
+                        <label for="admin-user">Usuario</label>
+                        <input type="text" id="admin-user" required placeholder="Ej. ssamira">
+                    </div>
+                    <div class="input-group">
+                        <label for="admin-pass">Contraseña</label>
+                        <input type="password" id="admin-pass" required placeholder="••••••••">
+                    </div>
+                    <div id="login-error" class="error-message hidden">
+                        <i class="fa-solid fa-triangle-exclamation"></i> Usuario o contraseña incorrectos.
+                    </div>
+                    <button type="submit" class="submit-btn login-btn">Ingresar al Panel</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Admin Dashboard View -->
+        <main id="admin-dashboard" class="fade-in hidden">
+            <header class="admin-header glass-card">
+                <div class="admin-profile">
+                    <div class="avatar"><i class="fa-solid fa-user-tie"></i></div>
+                    <div>
+                        <h2>Panel de Control</h2>
+                        <p>Ssamanth Clothes Admin</p>
+                    </div>
+                </div>
+                <div class="admin-actions">
+                    <button class="admin-btn reset-btn" id="btn-reset-raffle">
+                        <i class="fa-solid fa-rotate-left"></i> Reiniciar Sorteo
+                    </button>
+                    <button class="admin-btn logout-btn" id="btn-logout">
+                        <i class="fa-solid fa-right-from-bracket"></i> Salir
+                    </button>
+                </div>
+            </header>
+
+            <!-- Dashboard Stats -->
+            <section class="stats-grid">
+                <div class="glass-card stat-card">
+                    <i class="fa-solid fa-users stat-icon pink"></i>
+                    <div class="stat-info">
+                        <h3 id="stat-total-participants">0</h3>
+                        <p>Participantes Registradas</p>
+                    </div>
+                </div>
+                <div class="glass-card stat-card">
+                    <i class="fa-solid fa-calendar-days stat-icon purple"></i>
+                    <div class="stat-info">
+                        <h3 id="stat-latest-date">-</h3>
+                        <p>Último Registro</p>
+                    </div>
+                </div>
+                <div class="glass-card stat-card">
+                    <i class="fa-solid fa-ticket stat-icon yellow"></i>
+                    <div class="stat-info">
+                        <h3>Activo</h3>
+                        <p>Estado del Sorteo</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Participants Table -->
+            <section class="glass-card table-card">
+                <div class="table-header">
+                    <h2>Lista de Participantes</h2>
+                    <div class="table-actions">
+                        <div class="search-box">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input type="text" placeholder="Buscar por nombre o celular..." id="search-input">
+                        </div>
+                        <button class="admin-btn export-btn" id="btn-export-excel">
+                            <i class="fa-solid fa-file-excel"></i> Exportar CSV
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="participants-table">
+                        <thead>
+                            <tr>
+                                <th>N°</th>
+                                <th>Nombre Completo</th>
+                                <th>Celular / WhatsApp</th>
+                                <th>Fecha de Registro</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="participants-tbody">
+                            <!-- Rows will be injected dynamically -->
+                            <tr>
+                                <td colspan="5" class="loading-td">Cargando participantes...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Confirmation Modal for Reset -->
+    <div id="reset-confirm-modal" class="modal hidden">
+        <div class="modal-content glass-card confirm-modal">
+            <i class="fa-solid fa-circle-exclamation warning-icon"></i>
+            <h2>¿Confirmas el reinicio del sorteo?</h2>
+            <p>Esta acción limpiará a todos los participantes registrados para dar inicio a un nuevo sorteo. Los datos actuales se borrarán permanentemente de la vista activa.</p>
+            <div class="confirm-actions">
+                <button class="confirm-btn cancel-btn" id="btn-cancel-reset">Cancelar</button>
+                <button class="confirm-btn danger-btn" id="btn-confirm-reset">Sí, Reiniciar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 Ssamanth Clothes. Todos los derechos reservados.</p>
+        <button class="lock-footer-btn" id="btn-open-login"><i class="fa-solid fa-lock"></i></button>
+    </footer>
+
+    <!-- Firebase JS SDK v9+ (modular/compat) -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+    <!-- Custom Logic -->
+    <script src="firebase-config.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
