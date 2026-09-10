@@ -17,6 +17,7 @@ function initApp() {
     setupButtons();
     checkExistingRegistration();
     setupVoting();
+    setupImageLightbox();
 }
 
 // Simple SPA Routing based on hash
@@ -588,3 +589,90 @@ function updateAdminVotingUI() {
         }
     });
 }
+
+// Setup Lightbox Modal for Full Pants View
+function setupImageLightbox() {
+    const modal = document.getElementById("image-modal");
+    const lightboxImg = document.getElementById("lightbox-img");
+    const lightboxTitle = document.getElementById("lightbox-title");
+    const zoomWrapper = document.getElementById("lightbox-zoom-wrapper");
+    const closeBtn = document.getElementById("btn-close-image-modal");
+    const lightboxVoteBtn = document.getElementById("btn-lightbox-vote");
+    
+    let currentOption = "";
+
+    document.querySelectorAll(".prize-image-container.tall-image").forEach(container => {
+        container.addEventListener("click", () => {
+            const fullImg = container.getAttribute("data-full-img");
+            const fullTitle = container.getAttribute("data-full-title");
+            const card = container.closest(".option-card");
+            currentOption = card ? card.id.replace("card-", "") : "";
+            
+            if (lightboxImg) lightboxImg.src = fullImg;
+            if (lightboxTitle) lightboxTitle.innerText = fullTitle;
+            if (zoomWrapper) zoomWrapper.classList.remove("zoomed");
+            if (modal) modal.classList.remove("hidden");
+            
+            // Check if user already voted
+            const hasVoted = localStorage.getItem("ssamanth_voted");
+            if (lightboxVoteBtn) {
+                if (hasVoted) {
+                    lightboxVoteBtn.style.display = "none";
+                } else {
+                    lightboxVoteBtn.style.display = "inline-flex";
+                    const pantName = currentOption === 'locas' ? 'Jeans "Locas"' : 'Jeans "University"';
+                    lightboxVoteBtn.innerHTML = `<i class="fa-solid fa-check"></i> Votar por ${pantName}`;
+                }
+            }
+        });
+    });
+
+    // Close button
+    if (closeBtn) {
+        closeBtn.addEventListener("click", () => {
+            if (modal) modal.classList.add("hidden");
+            if (zoomWrapper) zoomWrapper.classList.remove("zoomed");
+        });
+    }
+
+    // Close on click outside the lightbox content
+    if (modal) {
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) {
+                modal.classList.add("hidden");
+                if (zoomWrapper) zoomWrapper.classList.remove("zoomed");
+            }
+        });
+    }
+
+    // Toggle zoom on clicking image container
+    if (zoomWrapper) {
+        zoomWrapper.addEventListener("click", (e) => {
+            if (e.target.tagName === 'IMG' || e.target === zoomWrapper) {
+                zoomWrapper.classList.toggle("zoomed");
+            }
+        });
+    }
+
+    // Quick vote action from inside the Lightbox modal
+    if (lightboxVoteBtn) {
+        lightboxVoteBtn.addEventListener("click", () => {
+            if (currentOption) {
+                const targetBtn = document.getElementById(`btn-vote-${currentOption}`);
+                if (modal) modal.classList.add("hidden");
+                if (targetBtn && !targetBtn.disabled) {
+                    targetBtn.click();
+                }
+            }
+        });
+    }
+
+    // Escape key closes modal
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && modal && !modal.classList.contains("hidden")) {
+            modal.classList.add("hidden");
+            if (zoomWrapper) zoomWrapper.classList.remove("zoomed");
+        }
+    });
+}
+

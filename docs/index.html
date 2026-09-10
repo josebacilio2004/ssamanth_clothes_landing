@@ -108,9 +108,12 @@
                 <div class="prizes-grid two-columns-grid">
                     <!-- Opción 1: Pantalón Locas -->
                     <div class="prize-card option-card" id="card-locas">
-                        <div class="prize-image-container tall-image">
+                        <div class="prize-image-container tall-image" data-full-img="assets/locas1.jpeg" data-full-title="Jeans Estilo 'Locas' - Denim Aesthetic" title="Clic para ampliar y ver foto completa">
                             <img src="assets/locas1.jpeg" alt="Jeans Diseño Locas" class="prize-image">
                             <span class="brand-badge shein">DENIM AESTHETIC</span>
+                            <div class="zoom-indicator">
+                                <i class="fa-solid fa-up-right-and-down-left-from-center"></i> <span>Ver foto completa</span>
+                            </div>
                         </div>
                         <div class="prize-info">
                             <div>
@@ -136,9 +139,12 @@
 
                     <!-- Opción 2: Pantalón University -->
                     <div class="prize-card option-card" id="card-university">
-                        <div class="prize-image-container tall-image">
+                        <div class="prize-image-container tall-image" data-full-img="assets/university1.png" data-full-title="Jeans Estilo 'University' - College Streetwear" title="Clic para ampliar y ver foto completa">
                             <img src="assets/university1.png" alt="Jeans Estilo University" class="prize-image">
                             <span class="brand-badge metal">COLLEGE STREETWEAR</span>
+                            <div class="zoom-indicator">
+                                <i class="fa-solid fa-up-right-and-down-left-from-center"></i> <span>Ver foto completa</span>
+                            </div>
                         </div>
                         <div class="prize-info">
                             <div>
@@ -479,6 +485,25 @@
             <div class="confirm-actions">
                 <button class="confirm-btn cancel-btn" id="btn-cancel-reset">Cancelar</button>
                 <button class="confirm-btn danger-btn" id="btn-confirm-reset">Sí, Reiniciar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Preview / Lightbox Modal -->
+    <div id="image-modal" class="modal hidden">
+        <div class="modal-content glass-card image-lightbox-content">
+            <button class="close-modal-btn" id="btn-close-image-modal" title="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+            <div class="lightbox-header">
+                <h3 id="lightbox-title">Detalle del Pantalón</h3>
+                <span class="lightbox-tip"><i class="fa-solid fa-magnifying-glass-plus"></i> Haz clic en la foto para hacer zoom / ver detalles</span>
+            </div>
+            <div class="lightbox-image-container" id="lightbox-zoom-wrapper" title="Haz clic para alternar zoom">
+                <img src="" alt="Prenda Completa" id="lightbox-img" class="lightbox-image">
+            </div>
+            <div class="lightbox-footer">
+                <button class="submit-btn lightbox-vote-btn" id="btn-lightbox-vote">
+                    <i class="fa-solid fa-check"></i> Votar por este pantalón
+                </button>
             </div>
         </div>
     </div>
