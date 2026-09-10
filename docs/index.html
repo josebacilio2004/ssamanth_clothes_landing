@@ -97,31 +97,31 @@
                 </div>
             </section>
 
-            <!-- Voting Questionnaire Section -->
+            <!-- Voting Questionnaire Section: Dinámica 1 (Elección de 1 de los 2 Pantalones) -->
             <section class="glass-card prizes-section" id="voting-section">
                 <div class="section-title">
-                    <i class="fa-solid fa-square-poll-vertical glow-icon pink-glow"></i>
-                    <h2>¿Qué prenda prefieres para el sorteo?</h2>
-                    <p class="section-subtitle">¡Vota por tu favorita! Solo se sorteará una de estas tres opciones en base a sus votos.</p>
+                    <i class="fa-solid fa-fire glow-icon pink-glow"></i>
+                    <h2>¿Cuál de estos 2 Pantalones prefieres para el Sorteo?</h2>
+                    <p class="section-subtitle"><strong>¡Dinámica 1 Rumbo a 1K!</strong> Vota por tu favorito. Al llegar a los 1,000 seguidores en TikTok sortearemos EN VIVO el pantalón ganador.</p>
                 </div>
                 
-                <div class="prizes-grid">
-                    <!-- Opción 1: Conjunto -->
-                    <div class="prize-card option-card" id="card-conjunto">
-                        <div class="prize-image-container">
-                            <img src="conjunto_brillos.png" alt="Conjunto de Mujer de Brillos" class="prize-image">
-                            <span class="brand-badge shein">SHEIN STYLE</span>
+                <div class="prizes-grid two-columns-grid">
+                    <!-- Opción 1: Pantalón Locas -->
+                    <div class="prize-card option-card" id="card-locas">
+                        <div class="prize-image-container tall-image">
+                            <img src="assets/locas1.jpeg" alt="Jeans Diseño Locas" class="prize-image">
+                            <span class="brand-badge shein">DENIM AESTHETIC</span>
                         </div>
                         <div class="prize-info">
                             <div>
-                                <h3>Conjunto de Brillos</h3>
-                                <p>Set coordinado de mujer de brillos. El outfit perfecto para resaltar y lucir radiante.</p>
+                                <h3>Jeans Estilo "Locas"</h3>
+                                <p>Jeans con diseño y arte gráfico exclusivo, tiro alto con caída relajada. ¡Súper en tendencia y combinable!</p>
                             </div>
                             <div class="vote-action-container">
-                                <button class="submit-btn vote-btn" data-option="conjunto" id="btn-vote-conjunto">
-                                    <i class="fa-solid fa-check"></i> Votar por Conjunto
+                                <button class="submit-btn vote-btn" data-option="locas" id="btn-vote-locas">
+                                    <i class="fa-solid fa-check"></i> Votar por Jeans "Locas"
                                 </button>
-                                <div class="vote-result hidden" id="result-conjunto">
+                                <div class="vote-result hidden" id="result-locas">
                                     <div class="vote-result-info">
                                         <span class="vote-percentage">0%</span>
                                         <span class="vote-count">(0 votos)</span>
@@ -134,50 +134,22 @@
                         </div>
                     </div>
 
-                    <!-- Opción 2: Pantalón -->
-                    <div class="prize-card option-card" id="card-pantalon">
-                        <div class="prize-image-container">
-                            <img src="pantalon_single.png" alt="Pantalón de Moda" class="prize-image">
-                            <span class="brand-badge metal">METAL & STOP</span>
+                    <!-- Opción 2: Pantalón University -->
+                    <div class="prize-card option-card" id="card-university">
+                        <div class="prize-image-container tall-image">
+                            <img src="assets/university1.png" alt="Jeans Estilo University" class="prize-image">
+                            <span class="brand-badge metal">COLLEGE STREETWEAR</span>
                         </div>
                         <div class="prize-info">
                             <div>
-                                <h3>Pantalón de Moda</h3>
-                                <p>Jeans slouchy, cargo o wide-leg para dama, cómodos y combinables para cualquier ocasión.</p>
+                                <h3>Jeans Estilo "University"</h3>
+                                <p>Jeans denim vintage con bolsillos cargo y estilo universitario. Look urbano premium para destacar siempre.</p>
                             </div>
                             <div class="vote-action-container">
-                                <button class="submit-btn vote-btn" data-option="pantalon" id="btn-vote-pantalon">
-                                    <i class="fa-solid fa-check"></i> Votar por Pantalón
+                                <button class="submit-btn vote-btn" data-option="university" id="btn-vote-university">
+                                    <i class="fa-solid fa-check"></i> Votar por Jeans "University"
                                 </button>
-                                <div class="vote-result hidden" id="result-pantalon">
-                                    <div class="vote-result-info">
-                                        <span class="vote-percentage">0%</span>
-                                        <span class="vote-count">(0 votos)</span>
-                                    </div>
-                                    <div class="vote-result-bar-container">
-                                        <div class="vote-result-bar" style="width: 0%"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Opción 3: Polera -->
-                    <div class="prize-card option-card" id="card-polera">
-                        <div class="prize-image-container">
-                            <img src="polera_mujer.png" alt="Polera de Mujer" class="prize-image">
-                            <span class="brand-badge sneakers">URBANO HYPE</span>
-                        </div>
-                        <div class="prize-info">
-                            <div>
-                                <h3>Polera de Mujer</h3>
-                                <p>Polera holgada y moderna para dama, confeccionada con tela premium de algodón abrigador.</p>
-                            </div>
-                            <div class="vote-action-container">
-                                <button class="submit-btn vote-btn" data-option="polera" id="btn-vote-polera">
-                                    <i class="fa-solid fa-check"></i> Votar por Polera
-                                </button>
-                                <div class="vote-result hidden" id="result-polera">
+                                <div class="vote-result hidden" id="result-university">
                                     <div class="vote-result-info">
                                         <span class="vote-percentage">0%</span>
                                         <span class="vote-count">(0 votos)</span>
@@ -267,7 +239,7 @@
                 </div>
             </section>
 
-            <!-- Steps & Rules -->
+            <!-- Steps & Rules con Dinámica 2 y Dinámica 5 -->
             <section class="steps-grid">
                 <!-- Paso 1: Registro -->
                 <div class="glass-card step-card" id="step-1-card">
@@ -284,6 +256,29 @@
                             <label for="user-phone"><i class="fa-solid fa-phone"></i> Celular / WhatsApp</label>
                             <input type="tel" id="user-phone" required placeholder="Ej. 917218376">
                         </div>
+
+                        <!-- Dinámica 5: Multiplicador de Oportunidades por Historia -->
+                        <div class="ticket-selector-wrapper">
+                            <label class="section-sublabel"><i class="fa-solid fa-ticket"></i> ¿Quieres multiplicar tus tickets de sorteo? (Dinámica 5)</label>
+                            <div class="ticket-tiers-grid">
+                                <label class="ticket-tier-card active" id="tier-label-1">
+                                    <input type="radio" name="ticket-tier" value="1" checked>
+                                    <div class="tier-badge">1 Ticket</div>
+                                    <div class="tier-info">Seguir en TikTok & IG</div>
+                                </label>
+                                <label class="ticket-tier-card" id="tier-label-2">
+                                    <input type="radio" name="ticket-tier" value="2">
+                                    <div class="tier-badge x2">2x Tickets</div>
+                                    <div class="tier-info">Subir captura a tu historia</div>
+                                </label>
+                                <label class="ticket-tier-card highlight-tier" id="tier-label-3">
+                                    <input type="radio" name="ticket-tier" value="3">
+                                    <div class="tier-badge x3">3x Tickets 🔥</div>
+                                    <div class="tier-info">Historia + Etiquetar a 2 amigas</div>
+                                </label>
+                            </div>
+                        </div>
+
                         <button type="submit" class="submit-btn" id="btn-submit-raffle">
                             <span>Registrarme ahora</span> <i class="fa-solid fa-paper-plane"></i>
                         </button>
@@ -292,23 +287,41 @@
                     <div id="form-success" class="success-message hidden">
                         <i class="fa-regular fa-circle-check"></i>
                         <h4>¡Registro Exitoso!</h4>
-                        <p>Tus datos han sido guardados. Continúa al paso 2 para validar tu participación.</p>
+                        <p id="success-ticket-summary">Tus datos han sido guardados. Continúa al paso 2 para validar tus tickets y activar tu cupón.</p>
                     </div>
                 </div>
 
                 <!-- Paso 2: Evidencia por WhatsApp -->
                 <div class="glass-card step-card disabled" id="step-2-card">
                     <div class="step-badge">2</div>
-                    <h3>Enviar Evidencia</h3>
-                    <p class="step-desc">Envía una captura de pantalla que demuestre que nos sigues en TikTok e Instagram.</p>
+                    <h3>Validar Evidencia & Cupón</h3>
+                    <p class="step-desc">Envía tus capturas al WhatsApp para confirmar tus tickets y activar tu descuento.</p>
                     
                     <div class="whatsapp-box">
-                        <p class="whatsapp-instructions">Pulsa el botón de abajo para enviarnos las capturas directamente a nuestro WhatsApp de soporte.</p>
-                        <a href="https://wa.me/51917218376?text=Hola%20Ssamanth%20Clothes!%20Aquí%20tienes%20las%20capturas%20de%20pantalla%20para%20validar%20mi%20participación%20en%20el%20Gran%20Sorteo." 
+                        <!-- Beneficio Dinámica 2 -->
+                        <div class="coupon-glass-card">
+                            <div class="coupon-header">
+                                <i class="fa-solid fa-tags"></i>
+                                <span>Beneficio Exclusivo (Dinámica 2)</span>
+                            </div>
+                            <div class="coupon-body">
+                                <div class="coupon-code-pill">
+                                    <span class="code-title">CÓDIGO:</span>
+                                    <strong class="code-value">SSAMANTH10</strong>
+                                </div>
+                                <span class="discount-badge">10% OFF</span>
+                            </div>
+                            <p class="coupon-note">El código se enviará precargado al WhatsApp para tu próxima compra en Ssamanth Clothes.</p>
+                        </div>
+
+                        <p class="whatsapp-instructions" id="whatsapp-instructions-text">
+                            Envía las capturas de seguimiento (y la captura de tu historia si elegiste 2x o 3x tickets) para validar tu participación.
+                        </p>
+                        <a href="https://wa.me/51917218376" 
                            target="_blank" 
                            class="whatsapp-btn disabled-btn" 
                            id="btn-whatsapp">
-                            <i class="fa-brands fa-whatsapp"></i> Enviar a +51 917 218 376
+                            <i class="fa-brands fa-whatsapp"></i> Validar Tickets y Cupón en WhatsApp
                         </a>
                     </div>
                 </div>
@@ -406,19 +419,14 @@
                 </div>
                 <div class="admin-voting-results-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-top: 15px;">
                     <div class="admin-vote-stat" style="background: rgba(0,0,0,0.25); padding: 20px; border-radius: 16px; border: 1px solid var(--glass-border);">
-                        <h4 style="font-size: 1rem; font-weight: 600; color: #fff;">Conjunto de Ropa</h4>
-                        <p id="admin-votes-conjunto" style="font-size: 1.8rem; font-weight: 700; color: var(--primary); margin: 8px 0;">0 votos (0%)</p>
-                        <div class="progress-bar-container" style="height: 6px; margin-bottom: 0; background: rgba(255,255,255,0.05);"><div id="admin-bar-conjunto" class="progress-bar" style="width: 0%"></div></div>
+                        <h4 style="font-size: 1rem; font-weight: 600; color: #fff;">Jeans Estilo "Locas"</h4>
+                        <p id="admin-votes-locas" style="font-size: 1.8rem; font-weight: 700; color: var(--primary); margin: 8px 0;">0 votos (0%)</p>
+                        <div class="progress-bar-container" style="height: 6px; margin-bottom: 0; background: rgba(255,255,255,0.05);"><div id="admin-bar-locas" class="progress-bar" style="width: 0%"></div></div>
                     </div>
                     <div class="admin-vote-stat" style="background: rgba(0,0,0,0.25); padding: 20px; border-radius: 16px; border: 1px solid var(--glass-border);">
-                        <h4 style="font-size: 1rem; font-weight: 600; color: #fff;">Pantalón de Moda</h4>
-                        <p id="admin-votes-pantalon" style="font-size: 1.8rem; font-weight: 700; color: var(--secondary); margin: 8px 0;">0 votos (0%)</p>
-                        <div class="progress-bar-container" style="height: 6px; margin-bottom: 0; background: rgba(255,255,255,0.05);"><div id="admin-bar-pantalon" class="progress-bar" style="width: 0%; background: linear-gradient(90deg, #a855f7, #6366f1)"></div></div>
-                    </div>
-                    <div class="admin-vote-stat" style="background: rgba(0,0,0,0.25); padding: 20px; border-radius: 16px; border: 1px solid var(--glass-border);">
-                        <h4 style="font-size: 1rem; font-weight: 600; color: #fff;">Polera Oversize</h4>
-                        <p id="admin-votes-polera" style="font-size: 1.8rem; font-weight: 700; color: var(--accent); margin: 8px 0;">0 votos (0%)</p>
-                        <div class="progress-bar-container" style="height: 6px; margin-bottom: 0; background: rgba(255,255,255,0.05);"><div id="admin-bar-polera" class="progress-bar" style="width: 0%; background: linear-gradient(90deg, #eab308, #ca8a04)"></div></div>
+                        <h4 style="font-size: 1rem; font-weight: 600; color: #fff;">Jeans Estilo "University"</h4>
+                        <p id="admin-votes-university" style="font-size: 1.8rem; font-weight: 700; color: var(--secondary); margin: 8px 0;">0 votos (0%)</p>
+                        <div class="progress-bar-container" style="height: 6px; margin-bottom: 0; background: rgba(255,255,255,0.05);"><div id="admin-bar-university" class="progress-bar" style="width: 0%; background: linear-gradient(90deg, #a855f7, #6366f1)"></div></div>
                     </div>
                 </div>
             </section>
@@ -445,6 +453,7 @@
                                 <th>N°</th>
                                 <th>Nombre Completo</th>
                                 <th>Celular / WhatsApp</th>
+                                <th>Tickets</th>
                                 <th>Fecha de Registro</th>
                                 <th>Acción</th>
                             </tr>
@@ -452,7 +461,7 @@
                         <tbody id="participants-tbody">
                             <!-- Rows will be injected dynamically -->
                             <tr>
-                                <td colspan="5" class="loading-td">Cargando participantes...</td>
+                                <td colspan="6" class="loading-td">Cargando participantes...</td>
                             </tr>
                         </tbody>
                     </table>

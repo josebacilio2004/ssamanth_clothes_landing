@@ -1561,4 +1561,256 @@ body {
     }
 }
 
+/* ==========================================================================
+   Dinámica 1, 2 & 5 Specific Styles
+   ========================================================================== */
+
+/* Two Columns Grid for 2 Pants in Dinámica 1 */
+.prizes-grid.two-columns-grid {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    max-width: 860px;
+    margin: 0 auto;
+    gap: 30px;
+}
+
+.prize-image-container.tall-image {
+    aspect-ratio: 4 / 5;
+    max-height: 420px;
+    overflow: hidden;
+    position: relative;
+}
+
+.prize-image-container.tall-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    transition: transform 0.5s ease;
+}
+
+.prize-card:hover .prize-image-container.tall-image img {
+    transform: scale(1.05);
+}
+
+/* Dinámica 5: Multiplicador de Tickets por Historia */
+.ticket-selector-wrapper {
+    margin: 18px 0 22px 0;
+    text-align: left;
+}
+
+.section-sublabel {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 12px;
+}
+
+.section-sublabel i {
+    color: var(--accent);
+    text-shadow: 0 0 10px rgba(241, 196, 15, 0.4);
+}
+
+.ticket-tiers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+}
+
+.ticket-tier-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--glass-border);
+    border-radius: 14px;
+    padding: 14px 12px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 6px;
+    overflow: hidden;
+}
+
+.ticket-tier-card input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.ticket-tier-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 94, 151, 0.4);
+    transform: translateY(-2px);
+}
+
+.ticket-tier-card.active {
+    background: rgba(255, 94, 151, 0.14);
+    border-color: var(--primary);
+    box-shadow: 0 0 18px rgba(255, 94, 151, 0.3);
+    transform: translateY(-3px);
+}
+
+.ticket-tier-card.active::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--secondary), var(--primary));
+}
+
+.tier-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
+
+.tier-badge.x2 {
+    background: linear-gradient(135deg, #a855f7, #6366f1);
+    box-shadow: 0 2px 8px rgba(168, 85, 247, 0.3);
+}
+
+.tier-badge.x3 {
+    background: linear-gradient(135deg, #ff3366, #ff8833);
+    box-shadow: 0 2px 10px rgba(255, 51, 102, 0.4);
+    animation: pulse-glow 2s infinite;
+}
+
+.tier-info {
+    font-size: 0.76rem;
+    color: var(--text-muted);
+    line-height: 1.35;
+    font-weight: 500;
+}
+
+.ticket-tier-card.active .tier-info {
+    color: #fff;
+}
+
+/* Dinámica 2: Cupón de Descuento SSAMANTH10 Glass Card */
+.coupon-glass-card {
+    background: linear-gradient(135deg, rgba(255, 94, 151, 0.08), rgba(155, 81, 224, 0.12));
+    border: 1px dashed rgba(255, 94, 151, 0.45);
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 18px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.coupon-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+}
+
+.coupon-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+}
+
+.coupon-code-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    padding: 6px 14px;
+}
+
+.code-title {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.code-value {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--accent);
+    letter-spacing: 1.5px;
+    font-family: monospace;
+}
+
+.discount-badge {
+    background: linear-gradient(90deg, #ff3366, #ff0055);
+    color: #fff;
+    font-weight: 800;
+    font-size: 0.85rem;
+    padding: 6px 12px;
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(255, 51, 102, 0.5);
+}
+
+.coupon-note {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* Admin Table Tickets Badge */
+.ticket-pill {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.ticket-pill.tier-1 {
+    background: rgba(255, 255, 255, 0.1);
+    color: #e0e0e0;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.ticket-pill.tier-2 {
+    background: rgba(168, 85, 247, 0.2);
+    color: #c084fc;
+    border: 1px solid rgba(168, 85, 247, 0.4);
+}
+
+.ticket-pill.tier-3 {
+    background: rgba(255, 51, 102, 0.2);
+    color: #ff6b8b;
+    border: 1px solid rgba(255, 51, 102, 0.45);
+    box-shadow: 0 0 10px rgba(255, 51, 102, 0.25);
+}
+
+@keyframes pulse-glow {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 2px 10px rgba(255, 51, 102, 0.4);
+    }
+    50% {
+        transform: scale(1.03);
+        box-shadow: 0 2px 18px rgba(255, 51, 102, 0.7);
+    }
+}
+
 

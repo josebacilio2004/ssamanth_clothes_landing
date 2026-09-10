@@ -59,6 +59,16 @@ function isAdminAuthenticated() {
 
 // Setup Form Handlers
 function setupForms() {
+    // Dinámica 5: Ticket Tier selection toggle
+    const tierRadios = document.querySelectorAll('input[name="ticket-tier"]');
+    tierRadios.forEach(radio => {
+        radio.addEventListener("change", (e) => {
+            document.querySelectorAll(".ticket-tier-card").forEach(card => card.classList.remove("active"));
+            const parentCard = e.target.closest(".ticket-tier-card");
+            if (parentCard) parentCard.classList.add("active");
+        });
+    });
+
     // Raffle Registration Form
     const raffleForm = document.getElementById("raffle-form");
     raffleForm.addEventListener("submit", async (e) => {
@@ -71,6 +81,10 @@ function setupForms() {
         const name = nameInput.value.trim();
         const phone = phoneInput.value.trim();
         
+        // Dinámica 5: Ticket tier
+        const selectedTierRadio = document.querySelector('input[name="ticket-tier"]:checked');
+        const tickets = selectedTierRadio ? parseInt(selectedTierRadio.value, 10) : 1;
+        
         // Basic validations
         if (!name || !phone) return;
         
@@ -80,10 +94,11 @@ function setupForms() {
         submitBtn.innerHTML = `<span>Registrando...</span> <i class="fa-solid fa-spinner fa-spin"></i>`;
         
         try {
-            // Save to Firebase Firestore
+            // Save to Firebase Firestore with tickets multiplier
             await db.collection("sorteo_participantes").add({
                 nombre: name,
                 telefono: phone,
+                tickets: tickets,
                 fecha_registro: firebase.firestore.FieldValue.serverTimestamp()
             });
             
@@ -91,9 +106,10 @@ function setupForms() {
             localStorage.setItem("ssamanth_registered", "true");
             localStorage.setItem("ssamanth_user_name", name);
             localStorage.setItem("ssamanth_user_phone", phone);
+            localStorage.setItem("ssamanth_user_tickets", tickets.toString());
             
             // Transition UI
-            showRegistrationSuccess(name, phone);
+            showRegistrationSuccess(name, phone, tickets);
             
         } catch (error) {
             console.error("Error al registrar participante: ", error);
@@ -209,15 +225,27 @@ function checkExistingRegistration() {
     if (isRegistered === "true") {
         const name = localStorage.getItem("ssamanth_user_name");
         const phone = localStorage.getItem("ssamanth_user_phone");
-        showRegistrationSuccess(name, phone);
+        const tickets = parseInt(localStorage.getItem("ssamanth_user_tickets") || "1", 10);
+        showRegistrationSuccess(name, phone, tickets);
     }
 }
 
 // UI updates on registration success
-function showRegistrationSuccess(name, phone) {
+function showRegistrationSuccess(name, phone, tickets = 1) {
+    if (!tickets) {
+        tickets = parseInt(localStorage.getItem("ssamanth_user_tickets") || "1", 10);
+    }
+
     // Hide form, show success message
     document.getElementById("raffle-form").classList.add("hidden");
-    document.getElementById("form-success").classList.remove("hidden");
+    const formSuccess = document.getElementById("form-success");
+    formSuccess.classList.remove("hidden");
+    
+    // Update ticket summary text
+    const summaryText = document.getElementById("success-ticket-summary");
+    if (summaryText) {
+        summaryText.innerHTML = `Tus datos han sido registrados con <strong>${tickets} Ticket(s)</strong>. Continúa al paso 2 para enviar tus capturas y activar tu cupón.`;
+    }
     
     // Highlight step 1 as complete
     document.getElementById("step-1-card").classList.add("completed-step");
@@ -226,13 +254,22 @@ function showRegistrationSuccess(name, phone) {
     const step2Card = document.getElementById("step-2-card");
     step2Card.classList.remove("disabled");
     
-    // Configure WhatsApp Button
+    // Update instructions if multiple tickets
+    const instructionsText = document.getElementById("whatsapp-instructions-text");
+    if (instructionsText) {
+        instructionsText.innerHTML = `Envía al WhatsApp tus capturas de seguimiento${tickets > 1 ? ` y la <strong>captura de tu historia (${tickets}x tickets seleccionados)</strong>` : ''} para validar tu participación y activar tu código promocional.`;
+    }
+
+    // Configure WhatsApp Button with Dinámica 2 (cupón SSAMANTH10) y Dinámica 5 (evidencia tickets)
     const waBtn = document.getElementById("btn-whatsapp");
     waBtn.classList.remove("disabled-btn");
     
-    const formattedName = encodeURIComponent(name);
-    const customMessage = `Hola Ssamanth Clothes! Mi nombre es ${formattedName} (Cel: ${phone}) y aquí tienes las capturas de pantalla para validar mi participación en el Gran Sorteo.`;
-    waBtn.href = `https://wa.me/51917218376?text=${customMessage}`;
+    const customMessage = `Hola Ssamanth Clothes! Mi nombre es ${name} (Cel: ${phone}).
+🎉 ¡Ya me registré en el Gran Sorteo con ${tickets} Ticket(s)!
+📸 Adjunto mis capturas de evidencia (seguir cuentas TikTok/IG${tickets > 1 ? ' + captura de mi historia' : ''}).
+🏷️ Además deseo validar mi CÓDIGO DE DESCUENTO: SSAMANTH10 (10% OFF) para mi próxima compra.`;
+
+    waBtn.href = `https://wa.me/51917218376?text=${encodeURIComponent(customMessage)}`;
 }
 
 // Show Admin Dashboard and subscribe to real-time updates
@@ -240,7 +277,7 @@ function showAdminDashboard() {
     document.getElementById("admin-dashboard").classList.remove("hidden");
     
     const tbody = document.getElementById("participants-tbody");
-    tbody.innerHTML = `<tr><td colspan="5" class="loading-td"><i class="fa-solid fa-spinner fa-spin"></i> Cargando participantes...</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="6" class="loading-td"><i class="fa-solid fa-spinner fa-spin"></i> Cargando participantes...</td></tr>`;
     
     // Listen to real-time changes
     unsubscribeRealtime = db.collection("sorteo_participantes")
@@ -253,6 +290,7 @@ function showAdminDashboard() {
                     id: doc.id,
                     nombre: data.nombre || "Sin nombre",
                     telefono: data.telefono || "Sin teléfono",
+                    tickets: data.tickets || 1,
                     fecha: data.fecha_registro ? data.fecha_registro.toDate() : new Date()
                 });
             });
@@ -266,7 +304,7 @@ function showAdminDashboard() {
             
         }, (error) => {
             console.error("Error al escuchar participantes: ", error);
-            tbody.innerHTML = `<tr><td colspan="5" class="loading-td" style="color: #e74c3c;"><i class="fa-solid fa-triangle-exclamation"></i> Error al cargar datos. Verifica las reglas de seguridad de Firestore.</td></tr>`;
+            tbody.innerHTML = `<tr><td colspan="6" class="loading-td" style="color: #e74c3c;"><i class="fa-solid fa-triangle-exclamation"></i> Error al cargar datos. Verifica las reglas de seguridad de Firestore.</td></tr>`;
         });
 }
 
@@ -294,7 +332,7 @@ function filterAndRenderTable(query) {
     );
     
     if (filtered.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="5" class="loading-td">No se encontraron participantes.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="6" class="loading-td">No se encontraron participantes.</td></tr>`;
         return;
     }
     
@@ -312,11 +350,14 @@ function filterAndRenderTable(query) {
         
         // WhatsApp link for admin
         const waLink = `https://wa.me/${p.telefono.startsWith('51') ? p.telefono : '51' + p.telefono}`;
+        const tickets = p.tickets || 1;
+        const ticketBadge = `<span class="ticket-pill tier-${tickets}">${tickets}x Ticket${tickets > 1 ? 's' : ''}</span>`;
         
         row.innerHTML = `
             <td>${idx + 1}</td>
             <td><strong>${p.nombre}</strong></td>
             <td>${p.telefono}</td>
+            <td>${ticketBadge}</td>
             <td>${dateFormatted}</td>
             <td class="action-btn-cell">
                 <a href="${waLink}" target="_blank" class="row-action-btn whatsapp-row-btn" title="Contactar por WhatsApp">
@@ -367,6 +408,7 @@ async function resetRaffleData() {
         localStorage.removeItem("ssamanth_registered");
         localStorage.removeItem("ssamanth_user_name");
         localStorage.removeItem("ssamanth_user_phone");
+        localStorage.removeItem("ssamanth_user_tickets");
         localStorage.removeItem("ssamanth_voted");
         
         // Reset the UI of voting
@@ -377,7 +419,7 @@ async function resetRaffleData() {
         document.querySelectorAll(".option-card").forEach(card => {
             card.classList.remove("voted-choice");
         });
-        ["conjunto", "pantalon", "polera"].forEach(opt => {
+        ["locas", "university"].forEach(opt => {
             const btn = document.getElementById(`btn-vote-${opt}`);
             const resultDiv = document.getElementById(`result-${opt}`);
             if (btn) {
@@ -406,15 +448,16 @@ function exportParticipantsToCSV() {
     
     // CSV Header (including UTF-8 BOM to display accented characters correctly in Excel)
     let csvContent = "\uFEFF";
-    csvContent += "N°,Nombre Completo,Celular / WhatsApp,Fecha de Registro\n";
+    csvContent += "N°,Nombre Completo,Celular / WhatsApp,Tickets,Fecha de Registro\n";
     
     currentParticipants.forEach((p, idx) => {
         const dateFormatted = p.fecha.toLocaleString('es-PE');
         // Escape commas and quotes for CSV safety
         const nameEscaped = `"${p.nombre.replace(/"/g, '""')}"`;
         const phoneEscaped = `"${p.telefono.replace(/"/g, '""')}"`;
+        const tickets = p.tickets || 1;
         
-        csvContent += `${idx + 1},${nameEscaped},${phoneEscaped},"${dateFormatted}"\n`;
+        csvContent += `${idx + 1},${nameEscaped},${phoneEscaped},${tickets},"${dateFormatted}"\n`;
     });
     
     // Create download link
@@ -431,8 +474,8 @@ function exportParticipantsToCSV() {
     document.body.removeChild(link);
 }
 
-// Global variable to store vote counts
-let voteCounts = { conjunto: 0, pantalon: 0, polera: 0 };
+// Global variable to store vote counts (Dinámica 1: Jeans Locas vs Jeans University)
+let voteCounts = { locas: 0, university: 0 };
 
 // Setup Interactive Voting Questionnaire
 function setupVoting() {
@@ -440,7 +483,7 @@ function setupVoting() {
     
     // Real-time listener for votes
     db.collection("sorteo_votos").onSnapshot((snapshot) => {
-        voteCounts = { conjunto: 0, pantalon: 0, polera: 0 };
+        voteCounts = { locas: 0, university: 0 };
         snapshot.forEach(doc => {
             const opt = doc.data().opcion;
             if (voteCounts.hasOwnProperty(opt)) {
@@ -506,9 +549,9 @@ function updateVotingUI() {
         chosenCard.classList.add("voted-choice");
     }
     
-    const totalVotes = voteCounts.conjunto + voteCounts.pantalon + voteCounts.polera;
+    const totalVotes = voteCounts.locas + voteCounts.university;
     
-    ["conjunto", "pantalon", "polera"].forEach(opt => {
+    ["locas", "university"].forEach(opt => {
         const btn = document.getElementById(`btn-vote-${opt}`);
         const resultDiv = document.getElementById(`result-${opt}`);
         
@@ -528,9 +571,9 @@ function updateVotingUI() {
 
 // Update admin statistics for votes
 function updateAdminVotingUI() {
-    const totalVotes = voteCounts.conjunto + voteCounts.pantalon + voteCounts.polera;
+    const totalVotes = voteCounts.locas + voteCounts.university;
     
-    ["conjunto", "pantalon", "polera"].forEach(opt => {
+    ["locas", "university"].forEach(opt => {
         const count = voteCounts[opt];
         const pct = totalVotes > 0 ? Math.round((count / totalVotes) * 100) : 0;
         
