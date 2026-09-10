@@ -265,12 +265,18 @@ function showRegistrationSuccess(name, phone, tickets = 1) {
     const waBtn = document.getElementById("btn-whatsapp");
     waBtn.classList.remove("disabled-btn");
     
-    const customMessage = `Hola Ssamanth Clothes! Mi nombre es ${name} (Cel: ${phone}).
-🎉 ¡Ya me registré en el Gran Sorteo con ${tickets} Ticket(s)!
-📸 Adjunto mis capturas de evidencia (seguir cuentas TikTok/IG${tickets > 1 ? ' + captura de mi historia' : ''}).
-🏷️ Además deseo validar mi CÓDIGO DE DESCUENTO: SSAMANTH10 (10% OFF) para mi próxima compra.`;
+    const storyEvidence = tickets > 1 ? ` + captura de mi historia (${tickets}x tickets)` : '';
+    const customMessage = `*¡Hola Ssamanth Clothes!* ✨🌸
 
-    waBtn.href = `https://wa.me/51917218376?text=${encodeURIComponent(customMessage)}`;
+Mi nombre es *${name}* (Cel: *${phone}*).
+
+🎟️ *¡Ya me registré en el Gran Sorteo con ${tickets} Ticket(s)!*
+📸 Adjunto mis capturas de evidencia (seguir cuentas TikTok/IG${storyEvidence}).
+
+🎁 *CÓDIGO DE DESCUENTO:* *SSAMANTH10* (10% OFF)
+¡Deseo validarlo para mi próxima compra en Ssamanth Clothes! 👗💖`;
+
+    waBtn.href = `https://api.whatsapp.com/send?phone=51917218376&text=${encodeURIComponent(customMessage)}`;
 }
 
 // Show Admin Dashboard and subscribe to real-time updates
